@@ -19,7 +19,6 @@
 #include "base/port.h"
 
 namespace dynamic_depth {
-namespace absl {
 
 // ----------------------------------------------------------------------
 // Base64Unescape()
@@ -42,10 +41,6 @@ bool Base64Unescape(const string& src, string* dest);
 // ----------------------------------------------------------------------
 bool WebSafeBase64Unescape(const string& src, string* dest);
 
-}  // namespace absl
-
-namespace strings {
-
 // ----------------------------------------------------------------------
 // Base64Escape()
 //    Encode "src" to "dest" using base64 encoding.
@@ -66,7 +61,6 @@ void Base64Escape(const unsigned char* src, ptrdiff_t szsrc, string* dest,
 // ----------------------------------------------------------------------
 string b2a_hex(const char* from, ptrdiff_t num);
 
-}  // namespace strings
 }  // namespace dynamic_depth
 
 #endif  // DYNAMIC_DEPTH_INTERNAL_STRINGS_ESCAPING_H_  // NOLINT

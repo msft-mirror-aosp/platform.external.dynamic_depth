@@ -216,8 +216,8 @@ string MD5Hash(const string& to_hash) {
   buffer.resize(kMd5DigestSize);
   MD5(reinterpret_cast<const uint8_t*>(to_hash.data()), to_hash.length(),
       &buffer[0]);
-  return dynamic_depth::strings::b2a_hex(
-      reinterpret_cast<const char*>(&buffer[0]), kMd5DigestSize);
+  return dynamic_depth::b2a_hex(reinterpret_cast<const char*>(&buffer[0]),
+                                kMd5DigestSize);
 }
 
 }  // namespace photos_editing_formats

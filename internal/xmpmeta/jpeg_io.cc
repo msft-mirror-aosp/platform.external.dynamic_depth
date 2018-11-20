@@ -175,7 +175,7 @@ std::vector<Section> Parse(const ParseOptions& options,
 void WriteSections(const std::vector<Section>& sections,
                    std::ostream* output_stream) {
   output_stream->put(0xff);
-  output_stream->put(kSoi);
+  output_stream->put(static_cast<unsigned char>(kSoi));
   for (const Section& section : sections) {
     output_stream->put(0xff);
     output_stream->put(section.marker);

@@ -7,11 +7,11 @@ third_party {
     type: PIPER
     value: "http://google3/photos/editing/formats/dynamic_depth"
   }
-  version: "221702153"
+  version: "222429857"
   last_upgrade_date {
     year: 2018
     month: 11
-    day: 15
+    day: 21
   }
   license_type: NOTICE
 }

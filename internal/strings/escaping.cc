@@ -6,7 +6,6 @@
 #include "strings/ascii_ctype.h"
 
 namespace dynamic_depth {
-namespace absl {
 
 // ----------------------------------------------------------------------
 // ptrdiff_t Base64Unescape() - base64 decoder
@@ -411,10 +410,6 @@ bool WebSafeBase64Unescape(const string& src, string* dest) {
   return Base64UnescapeInternal(src.data(), src.size(), dest, kUnWebSafeBase64);
 }
 
-}  // namespace absl
-
-namespace strings {
-
 // Base64Escape
 //
 // NOTE: We have to use an unsigned type for src because code built
@@ -588,5 +583,4 @@ string b2a_hex(const char* b, ptrdiff_t len) {
   return result;
 }
 
-}  // namespace strings
 }  // namespace dynamic_depth

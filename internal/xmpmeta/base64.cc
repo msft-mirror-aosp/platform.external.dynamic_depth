@@ -8,8 +8,7 @@ namespace {
 
 bool EncodeBase64RawData(const uint8* data, size_t data_size, string* output) {
   // Disable linting because string_view doesn't appear to support uint8_t.
-  dynamic_depth::strings::Base64Escape(data, data_size, output,
-                                       false);  // NOLINT
+  dynamic_depth::Base64Escape(data, data_size, output, false);  // NOLINT
   return output->length() > 0;
 }
 
@@ -41,10 +40,10 @@ bool DecodeBase64(const string& data, string* output) {
   // Support decoding of both web-safe and regular base64.
   // "Web-safe" base-64 replaces + with - and / with _, and omits
   // trailing = padding characters.
-  if (dynamic_depth::absl::Base64Unescape(data, output)) {
+  if (dynamic_depth::Base64Unescape(data, output)) {
     return true;
   }
-  return dynamic_depth::absl::WebSafeBase64Unescape(data, output);
+  return dynamic_depth::WebSafeBase64Unescape(data, output);
 }
 
 // Base64-encodes the given data.
