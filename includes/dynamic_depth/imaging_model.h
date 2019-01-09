@@ -10,7 +10,6 @@
 #include "xmpmeta/xml/deserializer.h"
 #include "xmpmeta/xml/serializer.h"
 
-namespace photos_editing_formats {
 namespace dynamic_depth {
 struct ImagingModelParams {
   // Required. The order of numbers is (x, y), in pixels.
@@ -55,7 +54,8 @@ class ImagingModel : public Element {
   void GetNamespaces(
       std::unordered_map<string, string>* ns_name_href_map) override;
 
-  bool Serialize(xml::Serializer* serializer) const override;
+  bool Serialize(
+      ::dynamic_depth::xmpmeta::xml::Serializer* serializer) const override;
 
   // Creates an ImagingModel from the given params.
   static std::unique_ptr<ImagingModel> FromData(
@@ -63,7 +63,7 @@ class ImagingModel : public Element {
 
   // Returns the deserialized equirect model, null if parsing fails.
   static std::unique_ptr<ImagingModel> FromDeserializer(
-      const xml::Deserializer& parent_deserializer);
+      const ::dynamic_depth::xmpmeta::xml::Deserializer& parent_deserializer);
 
   // Getters.
   Point<double> GetFocalLength() const;
@@ -85,6 +85,5 @@ class ImagingModel : public Element {
 };
 
 }  // namespace dynamic_depth
-}  // namespace photos_editing_formats
 
 #endif // DYNAMIC_DEPTH_INCLUDES_DYNAMIC_DEPTH_IMAGING_MODEL_H_  // NOLINT

@@ -6,9 +6,10 @@
 #include "android-base/logging.h"
 #include "xmpmeta/xml/utils.h"
 
-using photos_editing_formats::xml::FromXmlChar;
+using ::dynamic_depth::xmpmeta::xml::FromXmlChar;
 
-namespace photos_editing_formats {
+namespace dynamic_depth {
+namespace xmpmeta {
 namespace xml {
 
 xmlNodePtr DepthFirstSearch(const xmlDocPtr parent, const char* name) {
@@ -70,4 +71,5 @@ xmlNodePtr DepthFirstSearch(const xmlNodePtr parent, const char* prefix,
 }
 
 }  // namespace xml
-}  // namespace photos_editing_formats
+}  // namespace xmpmeta
+}  // namespace dynamic_depth

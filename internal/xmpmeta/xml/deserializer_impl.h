@@ -10,7 +10,8 @@
 #include "base/port.h"
 #include "xmpmeta/xml/deserializer.h"
 
-namespace photos_editing_formats {
+namespace dynamic_depth {
+namespace xmpmeta {
 namespace xml {
 
 // Deserializes an XML node.
@@ -88,6 +89,7 @@ class DeserializerImpl : public Deserializer {
 };
 
 }  // namespace xml
-}  // namespace photos_editing_formats
+}  // namespace xmpmeta
+}  // namespace dynamic_depth
 
 #endif // DYNAMIC_DEPTH_INTERNAL_XMPMETA_XML_DESERIALIZER_IMPL_H_  // NOLINT

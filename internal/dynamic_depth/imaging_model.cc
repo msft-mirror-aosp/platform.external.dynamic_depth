@@ -7,12 +7,12 @@
 #include "strings/numbers.h"
 #include "xmpmeta/base64.h"
 
-namespace photos_editing_formats {
 namespace dynamic_depth {
 namespace {
 
-using photos_editing_formats::xml::Deserializer;
-using photos_editing_formats::xml::Serializer;
+using ::dynamic_depth::xmpmeta::EncodeFloatArrayBase64;
+using ::dynamic_depth::xmpmeta::xml::Deserializer;
+using ::dynamic_depth::xmpmeta::xml::Serializer;
 
 constexpr char kFocalLengthX[] = "FocalLengthX";
 constexpr char kFocalLengthY[] = "FocalLengthY";
@@ -117,13 +117,12 @@ std::unique_ptr<ImagingModel> ImagingModel::FromData(
 }
 
 std::unique_ptr<ImagingModel> ImagingModel::FromDeserializer(
-    const xml::Deserializer& parent_deserializer) {
+    const Deserializer& parent_deserializer) {
   std::unique_ptr<Deserializer> deserializer =
       parent_deserializer.CreateDeserializer(
           DynamicDepthConst::Namespace(DynamicDepthConst::ImagingModel()),
           DynamicDepthConst::ImagingModel());
   if (deserializer == nullptr) {
-    LOG(ERROR) << "Deserializer must not be null";
     return nullptr;
   }
 
@@ -154,7 +153,7 @@ int ImagingModel::GetDistortionCount() const {
   return static_cast<int>(floor(params_.distortion.size() / 2));
 }
 
-bool ImagingModel::Serialize(xml::Serializer* serializer) const {
+bool ImagingModel::Serialize(Serializer* serializer) const {
   if (serializer == nullptr) {
     LOG(ERROR) << "Serializer is null";
     return false;
@@ -219,4 +218,3 @@ bool ImagingModel::Serialize(xml::Serializer* serializer) const {
 }
 
 }  // namespace dynamic_depth
-}  // namespace photos_editing_formats

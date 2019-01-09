@@ -10,7 +10,6 @@
 #include "xmpmeta/xml/deserializer.h"
 #include "xmpmeta/xml/serializer.h"
 
-namespace photos_editing_formats {
 namespace dynamic_depth {
 
 /**
@@ -29,7 +28,8 @@ class Pose : public Element {
       std::unordered_map<string, string>* ns_name_href_map) override;
 
   // Serializes this object. Returns true on success.
-  bool Serialize(xml::Serializer* serializer) const override;
+  bool Serialize(
+      ::dynamic_depth::xmpmeta::xml::Serializer* serializer) const override;
 
   // Creates a Pose from the given data.
   // The order of values in position is x, y, z.
@@ -47,7 +47,7 @@ class Pose : public Element {
   // Returns the deserialized XdmAudio; null if parsing fails.
   // The returned pointer is owned by the caller.
   static std::unique_ptr<Pose> FromDeserializer(
-      const xml::Deserializer& parent_deserializer,
+      const ::dynamic_depth::xmpmeta::xml::Deserializer& parent_deserializer,
       const char* parent_namespace);
 
   // Returns true if the device's position is provided.
@@ -75,7 +75,8 @@ class Pose : public Element {
   Pose();
 
   // Extracts camera pose fields.
-  bool ParsePoseFields(const xml::Deserializer& deserializer);
+  bool ParsePoseFields(
+      const ::dynamic_depth::xmpmeta::xml::Deserializer& deserializer);
 
   // Position variables, in meters relative to camera 0.
   // If providing position data, all three fields must be set.
@@ -93,6 +94,5 @@ class Pose : public Element {
 };
 
 }  // namespace dynamic_depth
-}  // namespace photos_editing_formats
 
 #endif // DYNAMIC_DEPTH_INCLUDES_DYNAMIC_DEPTH_POSE_H_  // NOLINT

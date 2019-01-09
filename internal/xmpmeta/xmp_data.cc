@@ -1,6 +1,7 @@
 #include "xmpmeta/xmp_data.h"
 
-namespace photos_editing_formats {
+namespace dynamic_depth {
+namespace xmpmeta {
 
 XmpData::XmpData() : xmp_(nullptr), xmp_extended_(nullptr) {}
 
@@ -25,4 +26,5 @@ const xmlDocPtr XmpData::ExtendedSection() const { return xmp_extended_; }
 
 xmlDocPtr* XmpData::MutableExtendedSection() { return &xmp_extended_; }
 
-}  // namespace photos_editing_formats
+}  // namespace xmpmeta
+}  // namespace dynamic_depth

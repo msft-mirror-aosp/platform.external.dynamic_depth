@@ -6,7 +6,8 @@
 
 #include "base/port.h"
 
-namespace photos_editing_formats {
+namespace dynamic_depth {
+namespace xmpmeta {
 
 // Contains the data for a section in a JPEG file.
 // A JPEG file contains many sections in addition to image data.
@@ -48,6 +49,7 @@ std::vector<Section> Parse(const ParseOptions& options,
 void WriteSections(const std::vector<Section>& sections,
                    std::ostream* output_stream);
 
-}  // namespace photos_editing_formats
+}  // namespace xmpmeta
+}  // namespace dynamic_depth
 
 #endif // DYNAMIC_DEPTH_INCLUDES_XMPMETA_JPEG_IO_H_  // NOLINT

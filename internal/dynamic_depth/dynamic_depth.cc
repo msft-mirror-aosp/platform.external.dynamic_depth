@@ -10,12 +10,11 @@
 #include "xmpmeta/xmp_data.h"
 #include "xmpmeta/xmp_writer.h"
 
-namespace photos_editing_formats {
 namespace dynamic_depth {
 namespace {
 
-using photos_editing_formats::CreateXmpData;
-using photos_editing_formats::XmpData;
+using ::dynamic_depth::xmpmeta::CreateXmpData;
+using ::dynamic_depth::xmpmeta::XmpData;
 
 constexpr char kImageMimePrefix[] = "image";
 
@@ -29,22 +28,15 @@ bool IsMimeTypeImage(const string& mime) {
 
 }  // namespace
 
-bool WriteImageAndMetadataAndContainer(const string& out_filename,
-                                       const uint8_t* primary_image_bytes,
-                                       size_t primary_image_bytes_count,
-                                       Device* device) {
+bool WriteImageAndMetadataAndContainer(std::istream* input_jpeg_stream,
+                                       Device* device,
+                                       std::ostream* output_jpeg_stream) {
   const std::unique_ptr<XmpData> xmp_data = CreateXmpData(true);
   device->SerializeToXmp(xmp_data.get());
-  std::istringstream input_jpeg_stream(
-      std::string(reinterpret_cast<const char*>(primary_image_bytes),
-                  primary_image_bytes_count));
-  std::ofstream output_jpeg_stream;
-  output_jpeg_stream.open(out_filename, std::ostream::out);
-  bool success = WriteLeftEyeAndXmpMeta(
-      out_filename, *xmp_data, &input_jpeg_stream, &output_jpeg_stream);
+  bool success =
+      WriteLeftEyeAndXmpMeta(*xmp_data, input_jpeg_stream, output_jpeg_stream);
 
   if (device->GetContainer() == nullptr) {
-    output_jpeg_stream.close();
     return success;
   }
 
@@ -55,9 +47,23 @@ bool WriteImageAndMetadataAndContainer(const string& out_filename,
     if (payload_size <= 0 || payload.empty()) {
       continue;
     }
-    output_jpeg_stream.write(payload.c_str(), payload_size);
+    output_jpeg_stream->write(payload.c_str(), payload_size);
   }
 
+  return success;
+}
+
+bool WriteImageAndMetadataAndContainer(const string& out_filename,
+                                       const uint8_t* primary_image_bytes,
+                                       size_t primary_image_bytes_count,
+                                       Device* device) {
+  std::istringstream input_jpeg_stream(
+      std::string(reinterpret_cast<const char*>(primary_image_bytes),
+                  primary_image_bytes_count));
+  std::ofstream output_jpeg_stream;
+  output_jpeg_stream.open(out_filename, std::ostream::out);
+  bool success = WriteImageAndMetadataAndContainer(&input_jpeg_stream, device,
+                                                   &output_jpeg_stream);
   output_jpeg_stream.close();
   return success;
 }
@@ -115,11 +121,11 @@ bool GetItemPayload(const string& input_image_filename,
   }
 
   std::string std_payload;
-  bool success = image_io::gcontainer::ParseFileAfterImage(
-      input_image_filename, file_offset, file_length, &std_payload);
+  bool success =
+      ::photos_editing_formats::image_io::gcontainer::ParseFileAfterImage(
+          input_image_filename, file_offset, file_length, &std_payload);
   *out_payload = std_payload;
   return success;
 }
 
 }  // namespace dynamic_depth
-}  // namespace photos_editing_formats

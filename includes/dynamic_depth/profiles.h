@@ -10,7 +10,6 @@
 #include "xmpmeta/xml/deserializer.h"
 #include "xmpmeta/xml/serializer.h"
 
-namespace photos_editing_formats {
 namespace dynamic_depth {
 
 // Implements the Device:Profiles field from the Dynamic Depth specification,
@@ -21,7 +20,8 @@ class Profiles : public Element {
   void GetNamespaces(
       std::unordered_map<string, string>* ns_name_href_map) override;
 
-  bool Serialize(xml::Serializer* serializer) const override;
+  bool Serialize(
+      ::dynamic_depth::xmpmeta::xml::Serializer* serializer) const override;
 
   // Static methods.
 
@@ -33,7 +33,7 @@ class Profiles : public Element {
   // Returns the deserialized profiles in a Profiles object, a unique_ptr owning
   // nothing if parsing failed for all the profiles.
   static std::unique_ptr<Profiles> FromDeserializer(
-      const xml::Deserializer& parent_deserializer);
+      const ::dynamic_depth::xmpmeta::xml::Deserializer& parent_deserializer);
 
   // Non-static methods.
 
@@ -51,6 +51,5 @@ class Profiles : public Element {
 };
 
 }  // namespace dynamic_depth
-}  // namespace photos_editing_formats
 
 #endif // DYNAMIC_DEPTH_INCLUDES_DYNAMIC_DEPTH_PROFILES_H_  // NOLINT

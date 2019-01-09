@@ -11,7 +11,6 @@
 #include "xmpmeta/xml/deserializer.h"
 #include "xmpmeta/xml/serializer.h"
 
-namespace photos_editing_formats {
 namespace dynamic_depth {
 struct ItemParams {
   // Required fields.
@@ -56,14 +55,15 @@ class Item : public Element {
   void GetNamespaces(
       std::unordered_map<string, string>* ns_name_href_map) override;
 
-  bool Serialize(xml::Serializer* serializer) const override;
+  bool Serialize(
+      ::dynamic_depth::xmpmeta::xml::Serializer* serializer) const override;
 
   static std::unique_ptr<Item> FromData(const ItemParams& params);
 
   // Returns the deserialized item elements, null if parsing failed for all
   // items.
   static std::unique_ptr<Item> FromDeserializer(
-      const xml::Deserializer& parent_deserializer);
+      const ::dynamic_depth::xmpmeta::xml::Deserializer& parent_deserializer);
 
   const string& GetMime() const;
   unsigned int GetLength() const;
@@ -84,6 +84,5 @@ class Item : public Element {
 };
 
 }  // namespace dynamic_depth
-}  // namespace photos_editing_formats
 
-#endif // DYNAMIC_DEPTH_INCLUDES_DYNAMIC_DEPTH_ITEM_H_  // NOLINT
+#endif  // DYNAMIC_DEPTH_INCLUDES_DYNAMIC_DEPTH_ITEM_H_  // NOLINT

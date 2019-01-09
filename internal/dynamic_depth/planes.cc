@@ -3,11 +3,10 @@
 #include "android-base/logging.h"
 #include "dynamic_depth/const.h"
 
-namespace photos_editing_formats {
 namespace dynamic_depth {
 
-using photos_editing_formats::xml::Deserializer;
-using photos_editing_formats::xml::Serializer;
+using ::dynamic_depth::xmpmeta::xml::Deserializer;
+using ::dynamic_depth::xmpmeta::xml::Serializer;
 
 // Private constructor.
 Planes::Planes() = default;
@@ -113,4 +112,3 @@ bool Planes::Serialize(Serializer* serializer) const {
 }
 
 }  // namespace dynamic_depth
-}  // namespace photos_editing_formats

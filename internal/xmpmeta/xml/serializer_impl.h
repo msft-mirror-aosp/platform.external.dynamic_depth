@@ -8,7 +8,8 @@
 
 #include "xmpmeta/xml/serializer.h"
 
-namespace photos_editing_formats {
+namespace dynamic_depth {
+namespace xmpmeta {
 namespace xml {
 
 // Writes properties, lists, and child nodes into an XML structure.
@@ -172,6 +173,7 @@ class SerializerImpl : public Serializer {
 };
 
 }  // namespace xml
-}  // namespace photos_editing_formats
+}  // namespace xmpmeta
+}  // namespace dynamic_depth
 
 #endif // DYNAMIC_DEPTH_INTERNAL_XMPMETA_XML_SERIALIZER_IMPL_H_  // NOLINT

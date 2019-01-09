@@ -16,12 +16,13 @@
 #include "xmpmeta/xml/utils.h"
 #include "xmpmeta/xmp_const.h"
 
-using photos_editing_formats::xml::DepthFirstSearch;
-using photos_editing_formats::xml::DeserializerImpl;
-using photos_editing_formats::xml::FromXmlChar;
-using photos_editing_formats::xml::GetFirstDescriptionElement;
+using ::dynamic_depth::xmpmeta::xml::DepthFirstSearch;
+using ::dynamic_depth::xmpmeta::xml::DeserializerImpl;
+using ::dynamic_depth::xmpmeta::xml::FromXmlChar;
+using ::dynamic_depth::xmpmeta::xml::GetFirstDescriptionElement;
 
-namespace photos_editing_formats {
+namespace dynamic_depth {
+namespace xmpmeta {
 namespace {
 
 const char kJpgExtension[] = "jpg";
@@ -235,7 +236,6 @@ bool GetStringProperty(const xmlNodePtr node, const char* prefix,
       return true;
     }
   }
-  LOG(WARNING) << "Could not find string attribute: " << property;
   return false;
 }
 
@@ -330,4 +330,5 @@ bool ReadXmpHeader(std::istream* input_stream, bool skip_extended,
   return ExtractXmpMeta(skip_extended, input_stream, xmp_data);
 }
 
-}  // namespace photos_editing_formats
+}  // namespace xmpmeta
+}  // namespace dynamic_depth

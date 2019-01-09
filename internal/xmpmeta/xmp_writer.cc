@@ -18,11 +18,13 @@
 #include "xmpmeta/xmp_data.h"
 #include "xmpmeta/xmp_parser.h"
 
-using photos_editing_formats::xml::FromXmlChar;
-using photos_editing_formats::xml::ToXmlChar;
-using photos_editing_formats::xml::XmlConst;
+using ::dynamic_depth::xmpmeta::xml::FromXmlChar;
+using ::dynamic_depth::xmpmeta::xml::GetFirstDescriptionElement;
+using ::dynamic_depth::xmpmeta::xml::ToXmlChar;
+using ::dynamic_depth::xmpmeta::xml::XmlConst;
 
-namespace photos_editing_formats {
+namespace dynamic_depth {
+namespace xmpmeta {
 namespace {
 
 const char kXmlStartTag = '<';
@@ -249,8 +251,7 @@ bool UpdateSections(const string& main_buffer, const string& extended_buffer,
 
 void LinkXmpStandardAndExtendedSections(const string& extended_buffer,
                                         xmlDocPtr standard_section) {
-  xmlNodePtr description_node =
-      xml::GetFirstDescriptionElement(standard_section);
+  xmlNodePtr description_node = GetFirstDescriptionElement(standard_section);
   xmlNsPtr xmp_note_ns_ptr =
       xmlNewNs(description_node, ToXmlChar(XmpConst::NoteNamespace()),
                ToXmlChar(XmpConst::HasExtensionPrefix()));
@@ -277,15 +278,15 @@ bool WriteLeftEyeAndXmpMeta(const string& left_data, const string& filename,
   std::istringstream input_jpeg_stream(left_data);
   std::ofstream output_jpeg_stream;
   output_jpeg_stream.open(filename, std::ostream::out);
-  bool success = WriteLeftEyeAndXmpMeta(filename, xmp_data, &input_jpeg_stream,
-                                        &output_jpeg_stream);
+  bool success =
+      WriteLeftEyeAndXmpMeta(xmp_data, &input_jpeg_stream, &output_jpeg_stream);
   output_jpeg_stream.close();
   return success;
 }
 
-bool WriteLeftEyeAndXmpMeta(const string& filename, const XmpData& xmp_data,
-                            std::istringstream* input_jpeg_stream,
-                            std::ofstream* output_jpeg_stream) {
+bool WriteLeftEyeAndXmpMeta(const XmpData& xmp_data,
+                            std::istream* input_jpeg_stream,
+                            std::ostream* output_jpeg_stream) {
   if (input_jpeg_stream == nullptr || output_jpeg_stream == nullptr) {
     LOG(ERROR) << "Input and output streams must both be non-null";
     return false;
@@ -311,40 +312,9 @@ bool WriteLeftEyeAndXmpMeta(const string& filename, const XmpData& xmp_data,
     return false;
   }
 
-  // Write the sections to the output stream.
-  if (!output_jpeg_stream->is_open()) {
-    output_jpeg_stream->open(filename, std::ostream::out);
-  }
-
   WriteSections(sections, output_jpeg_stream);
   return true;
 }
 
-bool AddXmpMetaToJpegStream(std::istream* input_jpeg_stream,
-                            const XmpData& xmp_data,
-                            std::ostream* output_jpeg_stream) {
-  // Get a list of sections from the input stream.
-  ParseOptions parse_options;
-  std::vector<Section> sections = Parse(parse_options, input_jpeg_stream);
-
-  string extended_buffer;
-  if (xmp_data.ExtendedSection() != nullptr) {
-    SerializeMeta(xmp_data.ExtendedSection(), &extended_buffer);
-    LinkXmpStandardAndExtendedSections(extended_buffer,
-                                       xmp_data.StandardSection());
-  }
-  string main_buffer;
-  SerializeMeta(xmp_data.StandardSection(), &main_buffer);
-
-  // Update the input sections with the XMP data.
-  if (!XmpSectionsAndSerializedDataValid(xmp_data, main_buffer,
-                                         extended_buffer) ||
-      !UpdateSections(main_buffer, extended_buffer, &sections)) {
-    return false;
-  }
-
-  WriteSections(sections, output_jpeg_stream);
-  return true;
-}
-
-}  // namespace photos_editing_formats
+}  // namespace xmpmeta
+}  // namespace dynamic_depth

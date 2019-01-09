@@ -5,10 +5,10 @@
 #include "strings/numbers.h"
 #include "xmpmeta/base64.h"
 
-using photos_editing_formats::xml::Deserializer;
-using photos_editing_formats::xml::Serializer;
+using ::dynamic_depth::xmpmeta::EncodeFloatArrayBase64;
+using ::dynamic_depth::xmpmeta::xml::Deserializer;
+using ::dynamic_depth::xmpmeta::xml::Serializer;
 
-namespace photos_editing_formats {
 namespace dynamic_depth {
 namespace {
 
@@ -71,7 +71,6 @@ std::unique_ptr<Plane> Plane::FromDeserializer(
           DynamicDepthConst::Namespace(DynamicDepthConst::Plane()),
           DynamicDepthConst::Plane());
   if (deserializer == nullptr) {
-    LOG(ERROR) << "Deserializer must not be null";
     return nullptr;
   }
 
@@ -174,4 +173,3 @@ bool Plane::ParsePlaneFields(const Deserializer& deserializer) {
 }
 
 }  // namespace dynamic_depth
-}  // namespace photos_editing_formats

@@ -1,7 +1,8 @@
 #ifndef DYNAMIC_DEPTH_INCLUDES_XMPMETA_XMP_CONST_H_  // NOLINT
 #define DYNAMIC_DEPTH_INCLUDES_XMPMETA_XMP_CONST_H_  // NOLINT
 
-namespace photos_editing_formats {
+namespace dynamic_depth {
+namespace xmpmeta {
 
 // Constants used in writing XMP metadata.
 struct XmpConst {
@@ -25,6 +26,7 @@ struct XmpConst {
   static const int ExtendedMaxBufferSize();
 };
 
-}  // namespace photos_editing_formats
+}  // namespace xmpmeta
+}  // namespace dynamic_depth
 
 #endif // DYNAMIC_DEPTH_INCLUDES_XMPMETA_XMP_CONST_H_  // NOLINT

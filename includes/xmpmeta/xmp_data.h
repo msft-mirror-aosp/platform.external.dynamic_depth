@@ -3,7 +3,8 @@
 
 #include <libxml/tree.h>
 
-namespace photos_editing_formats {
+namespace dynamic_depth {
+namespace xmpmeta {
 
 // XmpData contains the standard, and optionally extended, XMP metadata from a
 // JPEG file. See xmp_parser for reading XmpData from a JPEG or reading
@@ -29,6 +30,7 @@ class XmpData {
   xmlDocPtr xmp_extended_;
 };
 
-}  // namespace photos_editing_formats
+}  // namespace xmpmeta
+}  // namespace dynamic_depth
 
 #endif // DYNAMIC_DEPTH_INCLUDES_XMPMETA_XMP_DATA_H_  // NOLINT

@@ -10,7 +10,6 @@
 #include "xmpmeta/xml/deserializer.h"
 #include "xmpmeta/xml/serializer.h"
 
-namespace photos_editing_formats {
 namespace dynamic_depth {
 
 // Implements the EarthPose element in the Dynamic Depth specification, with
@@ -26,7 +25,8 @@ class EarthPose : public Element {
       std::unordered_map<string, string>* ns_name_href_map) override;
 
   // Serializes this object. Returns true on success.
-  bool Serialize(xml::Serializer* serializer) const override;
+  bool Serialize(
+      ::dynamic_depth::xmpmeta::xml::Serializer* serializer) const override;
 
   // Creates a EarthPose from the given data.
   // The order of values in position is latitude, longitude, altitude..
@@ -44,7 +44,7 @@ class EarthPose : public Element {
   // Returns the deserialized XdmAudio; null if parsing fails.
   // The returned pointer is owned by the caller.
   static std::unique_ptr<EarthPose> FromDeserializer(
-      const xml::Deserializer& parent_deserializer);
+      const ::dynamic_depth::xmpmeta::xml::Deserializer& parent_deserializer);
 
   // Returns true if the device's position is provided.
   bool HasPosition() const;
@@ -71,7 +71,8 @@ class EarthPose : public Element {
   EarthPose();
 
   // Extracts device pose fields.
-  bool ParseEarthPoseFields(const xml::Deserializer& deserializer);
+  bool ParseEarthPoseFields(
+      const ::dynamic_depth::xmpmeta::xml::Deserializer& deserializer);
 
   // Position variables, in meters relative to camera 0.
   // If providing position data, all three fields must be set.
@@ -89,6 +90,5 @@ class EarthPose : public Element {
 };
 
 }  // namespace dynamic_depth
-}  // namespace photos_editing_formats
 
 #endif // DYNAMIC_DEPTH_INCLUDES_DYNAMIC_DEPTH_EARTH_POSE_H_  // NOLINT

@@ -7,7 +7,8 @@
 
 #include "base/port.h"
 
-namespace photos_editing_formats {
+namespace dynamic_depth {
+namespace xmpmeta {
 namespace xml {
 
 // Convenience function to convert an xmlChar* to a char*
@@ -49,6 +50,7 @@ const string GetLiNodeContent(xmlNodePtr node);
 const string XmlDocToString(const xmlDocPtr doc);
 
 }  // namespace xml
-}  // namespace photos_editing_formats
+}  // namespace xmpmeta
+}  // namespace dynamic_depth
 
 #endif // DYNAMIC_DEPTH_INTERNAL_XMPMETA_XML_UTILS_H_  // NOLINT

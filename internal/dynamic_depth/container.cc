@@ -3,10 +3,9 @@
 #include "android-base/logging.h"
 #include "dynamic_depth/const.h"
 
-using photos_editing_formats::xml::Deserializer;
-using photos_editing_formats::xml::Serializer;
+using ::dynamic_depth::xmpmeta::xml::Deserializer;
+using ::dynamic_depth::xmpmeta::xml::Serializer;
 
-namespace photos_editing_formats {
 namespace dynamic_depth {
 
 constexpr char kNamespaceHref[] =
@@ -119,4 +118,3 @@ bool Container::Serialize(Serializer* serializer) const {
 }
 
 }  // namespace dynamic_depth
-}  // namespace photos_editing_formats

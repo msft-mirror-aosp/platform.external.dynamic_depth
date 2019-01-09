@@ -7,7 +7,8 @@
 #include "base/integral_types.h"
 #include "strings/escaping.h"
 
-namespace photos_editing_formats {
+namespace dynamic_depth {
+namespace xmpmeta {
 namespace {
 
 const int kMd5DigestSize = 16;
@@ -134,7 +135,8 @@ void MD5Final(uint8 digest[16], MD5Context* ctx) {
 // The core of the MD5 algorithm, this alters an existing MD5 hash to
 // reflect the addition of 16 longwords of new data.  MD5Update blocks
 // the data and converts bytes into longwords for this routine.
-DDEPTH_NO_UNSIGNED_OVERFLOW_CHECK void MD5Transform(uint32 buf[4], const uint32 in[16]) {
+DDEPTH_NO_UNSIGNED_OVERFLOW_CHECK void MD5Transform(uint32 buf[4],
+                                                    const uint32 in[16]) {
   uint32 a = buf[0];
   uint32 b = buf[1];
   uint32 c = buf[2];
@@ -231,4 +233,5 @@ string MD5Hash(const string& to_hash) {
                                 kMd5DigestSize);
 }
 
-}  // namespace photos_editing_formats
+}  // namespace xmpmeta
+}  // namespace dynamic_depth

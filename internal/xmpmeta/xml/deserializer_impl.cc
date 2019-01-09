@@ -11,7 +11,8 @@
 #include "xmpmeta/xml/utils.h"
 #include "xmpmeta/xmp_parser.h"
 
-namespace photos_editing_formats {
+namespace dynamic_depth {
+namespace xmpmeta {
 namespace xml {
 namespace {
 
@@ -63,7 +64,6 @@ bool GetStringProperty(const xmlNodePtr node, const string& prefix,
       return true;
     }
   }
-  LOG(WARNING) << "Could not find string attribute: " << property;
   return false;
 }
 
@@ -318,4 +318,5 @@ bool DeserializerImpl::ParseDoubleArray(const string& prefix,
 }
 
 }  // namespace xml
-}  // namespace photos_editing_formats
+}  // namespace xmpmeta
+}  // namespace dynamic_depth
