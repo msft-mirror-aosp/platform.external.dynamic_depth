@@ -1,6 +1,8 @@
 #ifndef DYNAMIC_DEPTH_INCLUDES_DYNAMIC_DEPTH_DYNAMIC_DEPTH_H_  // NOLINT
 #define DYNAMIC_DEPTH_INCLUDES_DYNAMIC_DEPTH_DYNAMIC_DEPTH_H_  // NOLINT
 
+#include <iostream>
+
 #include "dynamic_depth/device.h"
 #include "xmpmeta/xmp_writer.h"
 
@@ -31,6 +33,12 @@ bool GetItemPayload(const string& input_image_filename,
 // Convenience method for the aboove.
 bool GetItemPayload(const string& input_image_filename, const Device* device,
                     const string& item_uri, string* out_payload);
+
+// Used by AOSP.
+// Same as the above, but for an istream.
+bool GetItemPayload(const Container* container, const string& item_uri,
+                    std::istream& input_jpeg_stream, string* out_payload);
+
 }  // namespace dynamic_depth
 
 #endif  // DYNAMIC_DEPTH_INCLUDES_DYNAMIC_DEPTH_DYNAMIC_DEPTH_H_  // NOLINT

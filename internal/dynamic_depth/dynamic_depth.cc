@@ -82,6 +82,12 @@ bool GetItemPayload(const string& input_image_filename, const Device* device,
 bool GetItemPayload(const string& input_image_filename,
                     const Container* container, const string& item_uri,
                     string* out_payload) {
+  std::ifstream input_stream(input_image_filename);
+  return GetItemPayload(container, item_uri, input_stream, out_payload);
+}
+
+bool GetItemPayload(const Container* container, const string& item_uri,
+                    std::istream& input_jpeg_stream, string* out_payload) {
   if (container == nullptr) {
     LOG(ERROR) << "Container cannot be null";
     return false;
@@ -121,9 +127,9 @@ bool GetItemPayload(const string& input_image_filename,
   }
 
   std::string std_payload;
-  bool success =
-      ::photos_editing_formats::image_io::gcontainer::ParseFileAfterImage(
-          input_image_filename, file_offset, file_length, &std_payload);
+  bool success = ::photos_editing_formats::image_io::gcontainer::
+      ParseFileAfterImageFromStream(file_offset, file_length, input_jpeg_stream,
+                                    &std_payload);
   *out_payload = std_payload;
   return success;
 }
