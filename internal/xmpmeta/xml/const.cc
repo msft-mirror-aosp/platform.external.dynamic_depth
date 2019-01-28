@@ -1,6 +1,7 @@
 #include "xmpmeta/xml/const.h"
 
-namespace photos_editing_formats {
+namespace dynamic_depth {
+namespace xmpmeta {
 namespace xml {
 
 const char* XmlConst::EncodingStr() { return "UTF-8"; }
@@ -30,4 +31,5 @@ const char* XmlConst::Separator() { return ":"; }
 const char* XmlConst::Version() { return "1.0"; }
 
 }  // namespace xml
-}  // namespace photos_editing_formats
+}  // namespace xmpmeta
+}  // namespace dynamic_depth

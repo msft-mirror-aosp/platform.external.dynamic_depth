@@ -18,7 +18,6 @@
 #include "xmpmeta/xml/deserializer.h"
 #include "xmpmeta/xml/serializer.h"
 
-namespace photos_editing_formats {
 namespace dynamic_depth {
 
 // The camera trait is serialized only if it is one of PHYSICAL or LOGICAL.
@@ -74,7 +73,8 @@ class Camera : public Element {
   void GetNamespaces(
       std::unordered_map<string, string>* ns_name_href_map) override;
 
-  bool Serialize(xml::Serializer* serializer) const override;
+  bool Serialize(
+      ::dynamic_depth::xmpmeta::xml::Serializer* serializer) const override;
 
   // Creates a Camera from the given objects in params.
   // Aside from the Image element, all other elements are optional and can be
@@ -95,7 +95,7 @@ class Camera : public Element {
   // Returns the deserialized Camera object, null if parsing fails.
   // Not sensitive to case when parsing a camera's trait.
   static std::unique_ptr<Camera> FromDeserializer(
-      const xml::Deserializer& parent_deserializer);
+      const ::dynamic_depth::xmpmeta::xml::Deserializer& parent_deserializer);
 
   // Getters. Except for Imaeg (which should never be null), these will return
   // null if the corresponding fields are not present.
@@ -121,6 +121,5 @@ class Camera : public Element {
 };
 
 }  // namespace dynamic_depth
-}  // namespace photos_editing_formats
 
 #endif // DYNAMIC_DEPTH_INCLUDES_DYNAMIC_DEPTH_CAMERA_H_  // NOLINT

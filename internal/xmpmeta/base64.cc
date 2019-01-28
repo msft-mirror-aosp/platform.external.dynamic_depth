@@ -3,7 +3,8 @@
 #include "android-base/logging.h"
 #include "strings/escaping.h"
 
-namespace photos_editing_formats {
+namespace dynamic_depth {
+namespace xmpmeta {
 namespace {
 
 bool EncodeBase64RawData(const uint8* data, size_t data_size, string* output) {
@@ -81,4 +82,5 @@ bool EncodeDoubleArrayBase64(const std::vector<double>& data, string* output) {
 bool DecodeDoubleArrayBase64(const string& data, std::vector<double>* output) {
   return InternalDecodeArrayBase64<double>(data, output);
 }
-}  // namespace photos_editing_formats
+}  // namespace xmpmeta
+}  // namespace dynamic_depth

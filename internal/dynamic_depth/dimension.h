@@ -1,7 +1,6 @@
 #ifndef DYNAMIC_DEPTH_INTERNAL_DYNAMIC_DEPTH_DIMENSION_H_  // NOLINT
 #define DYNAMIC_DEPTH_INTERNAL_DYNAMIC_DEPTH_DIMENSION_H_  // NOLINT
 
-namespace photos_editing_formats {
 namespace dynamic_depth {
 
 // A struct that contains the width and height of a size or the x and y
@@ -21,6 +20,5 @@ struct Dimension {
 };
 
 }  // namespace dynamic_depth
-}  // namespace photos_editing_formats
 
-#endif // DYNAMIC_DEPTH_INTERNAL_DYNAMIC_DEPTH_DIMENSION_H_  // NOLINT
+#endif  // DYNAMIC_DEPTH_INTERNAL_DYNAMIC_DEPTH_DIMENSION_H_  // NOLINT

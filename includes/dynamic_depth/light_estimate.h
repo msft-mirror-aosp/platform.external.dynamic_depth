@@ -9,7 +9,6 @@
 #include "xmpmeta/xml/deserializer.h"
 #include "xmpmeta/xml/serializer.h"
 
-namespace photos_editing_formats {
 namespace dynamic_depth {
 
 // Light estimation parameters for a camera.
@@ -26,7 +25,8 @@ class LightEstimate : public Element {
       std::unordered_map<string, string>* ns_name_href_map) override;
 
   // Serializes this object.
-  bool Serialize(xml::Serializer* serializer) const override;
+  bool Serialize(
+      ::dynamic_depth::xmpmeta::xml::Serializer* serializer) const override;
 
   // Creates an LightEstimate from the given field.
   static std::unique_ptr<LightEstimate> FromData(float pixel_intensity);
@@ -39,7 +39,7 @@ class LightEstimate : public Element {
 
   // Returns the deserialized LightEstimate; null if parsing fails.
   static std::unique_ptr<LightEstimate> FromDeserializer(
-      const xml::Deserializer& parent_deserializer);
+      const ::dynamic_depth::xmpmeta::xml::Deserializer& parent_deserializer);
 
   // Returns the average pixel internsity.
   float GetPixelIntensity() const;
@@ -63,6 +63,5 @@ class LightEstimate : public Element {
 };
 
 }  // namespace dynamic_depth
-}  // namespace photos_editing_formats
 
 #endif // DYNAMIC_DEPTH_INCLUDES_DYNAMIC_DEPTH_LIGHT_ESTIMATE_H_  // NOLINT

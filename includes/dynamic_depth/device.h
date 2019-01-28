@@ -21,7 +21,6 @@
 #include "dynamic_depth/vendor_info.h"
 #include "xmpmeta/xmp_data.h"
 
-namespace photos_editing_formats {
 namespace dynamic_depth {
 
 struct DeviceParams {
@@ -77,7 +76,8 @@ class Device {
 
   // Creates a Device from pre-extracted XMP metadata. Returns null if
   // parsing fails. Both the standard and extended XMP sections are required.
-  static std::unique_ptr<Device> FromXmp(const XmpData& xmp);
+  static std::unique_ptr<Device> FromXmp(
+      const ::dynamic_depth::xmpmeta::XmpData& xmp);
 
   // Creates a Device by extracting XMP metadata from a JPEG and parsing it.
   // If using XMP for other things as well, FromXmp() should be used instead to
@@ -99,7 +99,7 @@ class Device {
   const AppInfo* GetAppInfo() const;
 
   // Not const for XML memory management reasons. More info in source comments.
-  bool SerializeToXmp(XmpData* xmp);
+  bool SerializeToXmp(::dynamic_depth::xmpmeta::XmpData* xmp);
 
   // Saves Device metadata to a .xml file.
   bool SerializeToXmlFile(const char* filename);
@@ -126,6 +126,5 @@ class Device {
 };
 
 }  // namespace dynamic_depth
-}  // namespace photos_editing_formats
 
-#endif // DYNAMIC_DEPTH_INCLUDES_DYNAMIC_DEPTH_DEVICE_H_  // NOLINT
+#endif  // DYNAMIC_DEPTH_INCLUDES_DYNAMIC_DEPTH_DEVICE_H_  // NOLINT

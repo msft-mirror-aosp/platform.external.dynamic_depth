@@ -3,7 +3,6 @@
 #include "android-base/logging.h"
 #include "base/port.h"
 
-namespace photos_editing_formats {
 namespace dynamic_depth {
 namespace {
 
@@ -111,4 +110,3 @@ const std::string DynamicDepthConst::Namespace(const std::string& node_name) {
   return "";
 }
 }  // namespace dynamic_depth
-}  // namespace photos_editing_formats

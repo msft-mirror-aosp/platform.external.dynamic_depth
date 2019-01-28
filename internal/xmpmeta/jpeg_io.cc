@@ -5,7 +5,8 @@
 
 #include "android-base/logging.h"
 
-namespace photos_editing_formats {
+namespace dynamic_depth {
+namespace xmpmeta {
 namespace {
 
 // File markers.
@@ -191,4 +192,5 @@ void WriteSections(const std::vector<Section>& sections,
   }
 }
 
-}  // namespace photos_editing_formats
+}  // namespace xmpmeta
+}  // namespace dynamic_depth

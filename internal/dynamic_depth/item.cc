@@ -3,10 +3,9 @@
 #include "android-base/logging.h"
 #include "dynamic_depth/const.h"
 
-using photos_editing_formats::xml::Deserializer;
-using photos_editing_formats::xml::Serializer;
+using ::dynamic_depth::xmpmeta::xml::Deserializer;
+using ::dynamic_depth::xmpmeta::xml::Serializer;
 
-namespace photos_editing_formats {
 namespace dynamic_depth {
 namespace {
 
@@ -67,13 +66,12 @@ std::unique_ptr<Item> Item::FromData(const ItemParams& params) {
 }
 
 std::unique_ptr<Item> Item::FromDeserializer(
-    const xml::Deserializer& parent_deserializer) {
+    const Deserializer& parent_deserializer) {
   std::unique_ptr<Deserializer> deserializer =
       parent_deserializer.CreateDeserializer(
           DynamicDepthConst::Namespace(DynamicDepthConst::Item()),
           DynamicDepthConst::Item());
   if (deserializer == nullptr) {
-    LOG(ERROR) << "Deserializer must not be null";
     return nullptr;
   }
 
@@ -110,7 +108,7 @@ const string& Item::GetPayloadToSerialize() const {
   return params_.payload_to_serialize;
 }
 
-bool Item::Serialize(xml::Serializer* serializer) const {
+bool Item::Serialize(Serializer* serializer) const {
   if (serializer == nullptr) {
     LOG(ERROR) << "Serializer is null";
     return false;
@@ -136,4 +134,3 @@ bool Item::Serialize(xml::Serializer* serializer) const {
 }
 
 }  // namespace dynamic_depth
-}  // namespace photos_editing_formats

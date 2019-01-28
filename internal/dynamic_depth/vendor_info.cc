@@ -5,10 +5,9 @@
 #include "xmpmeta/base64.h"
 #include "xmpmeta/xml/utils.h"
 
-using photos_editing_formats::xml::Deserializer;
-using photos_editing_formats::xml::Serializer;
+using ::dynamic_depth::xmpmeta::xml::Deserializer;
+using ::dynamic_depth::xmpmeta::xml::Serializer;
 
-namespace photos_editing_formats {
 namespace dynamic_depth {
 namespace {
 
@@ -105,4 +104,3 @@ bool VendorInfo::ParseFields(const Deserializer& deserializer) {
 }
 
 }  // namespace dynamic_depth
-}  // namespace photos_editing_formats

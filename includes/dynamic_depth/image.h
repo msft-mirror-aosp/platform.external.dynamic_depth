@@ -10,7 +10,6 @@
 #include "xmpmeta/xml/deserializer.h"
 #include "xmpmeta/xml/serializer.h"
 
-namespace photos_editing_formats {
 namespace dynamic_depth {
 
 // The ItemSemantic of this Image.
@@ -30,7 +29,8 @@ class Image : public Element {
       std::unordered_map<string, string>* ns_name_href_map) override;
 
   // Serializes this object.
-  bool Serialize(xml::Serializer* serializer) const override;
+  bool Serialize(
+      ::dynamic_depth::xmpmeta::xml::Serializer* serializer) const override;
 
   // Creates an original (non-primary) Image from the given fields. Returns null
   // if one of the following is true:
@@ -64,7 +64,7 @@ class Image : public Element {
 
   // Returns the deserialized Image; null if parsing fails.
   static std::unique_ptr<Image> FromDeserializer(
-      const xml::Deserializer& parent_deserializer);
+      const ::dynamic_depth::xmpmeta::xml::Deserializer& parent_deserializer);
 
   const string& GetItemUri() const;
   ImageItemSemantic GetItemSemantic() const;
@@ -77,13 +77,13 @@ class Image : public Element {
   Image();
 
   // Extracts image fields.
-  bool ParseImageFields(const xml::Deserializer& deserializer);
+  bool ParseImageFields(
+      const ::dynamic_depth::xmpmeta::xml::Deserializer& deserializer);
 
   string item_uri_;
   ImageItemSemantic item_semantic_;
 };
 
 }  // namespace dynamic_depth
-}  // namespace photos_editing_formats
 
 #endif // DYNAMIC_DEPTH_INCLUDES_DYNAMIC_DEPTH_IMAGE_H_  // NOLINT

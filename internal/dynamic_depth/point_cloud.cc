@@ -6,10 +6,10 @@
 #include "xmpmeta/base64.h"
 #include "xmpmeta/xml/utils.h"
 
-using photos_editing_formats::xml::Deserializer;
-using photos_editing_formats::xml::Serializer;
+using ::dynamic_depth::xmpmeta::EncodeFloatArrayBase64;
+using ::dynamic_depth::xmpmeta::xml::Deserializer;
+using ::dynamic_depth::xmpmeta::xml::Serializer;
 
-namespace photos_editing_formats {
 namespace dynamic_depth {
 namespace {
 
@@ -43,9 +43,9 @@ std::unique_ptr<PointCloud> PointCloud::FromData(
     return nullptr;
   }
 
-  if (points.size() % 3 != 0) {
-    LOG(ERROR) << "Points must be (x, y, z) tuples, so the size must be "
-               << "divisible by 3, got " << points.size();
+  if (points.size() % 4 != 0) {
+    LOG(ERROR) << "Points must be (x, y, z, c) tuples, so the size must be "
+               << "divisible by 4, got " << points.size();
     return nullptr;
   }
 
@@ -72,7 +72,7 @@ std::unique_ptr<PointCloud> PointCloud::FromDeserializer(
 }
 
 int PointCloud::GetPointCount() const {
-  return static_cast<int>(points_.size() / 3);
+  return static_cast<int>(points_.size() / 4);
 }
 
 const std::vector<float>& PointCloud::GetPoints() const { return points_; }
@@ -89,7 +89,7 @@ bool PointCloud::Serialize(Serializer* serializer) const {
     return false;
   }
 
-  // No error checking (e.g. points_.size() % 3 == 0), because serialization
+  // No error checking (e.g. points_.size() % 4 == 0), because serialization
   // shouldn't be blocked by this.
   string base64_encoded_points;
   if (!EncodeFloatArrayBase64(points_, &base64_encoded_points)) {
@@ -98,7 +98,7 @@ bool PointCloud::Serialize(Serializer* serializer) const {
   }
 
   // Write required fields.
-  int point_count = static_cast<int>(points_.size() / 3);
+  int point_count = static_cast<int>(points_.size() / 4);
   if (!serializer->WriteProperty(
           DynamicDepthConst::PointCloud(), kPointCount,
           ::dynamic_depth::strings::SimpleItoa(point_count))) {
@@ -131,13 +131,13 @@ bool PointCloud::ParseFields(const Deserializer& deserializer) {
     return false;
   }
 
-  if (points.size() % 3 != 0) {
+  if (points.size() % 4 != 0) {
     LOG(ERROR) << "Parsed " << points.size() << " values but expected the size "
-               << "to be divisible by 3 for (x, y, z) tuple representation";
+               << "to be divisible by 4 for (x, y, z, c) tuple representation";
     return false;
   }
 
-  int parsed_points_count = static_cast<int>(points.size() / 3);
+  int parsed_points_count = static_cast<int>(points.size() / 4);
   if (parsed_points_count != point_count) {
     LOG(ERROR) << "Parsed PointCount = " << point_count << " but "
                << parsed_points_count << " points were found";
@@ -161,4 +161,3 @@ bool PointCloud::ParseFields(const Deserializer& deserializer) {
 }
 
 }  // namespace dynamic_depth
-}  // namespace photos_editing_formats
