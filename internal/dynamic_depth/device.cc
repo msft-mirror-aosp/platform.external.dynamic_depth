@@ -14,15 +14,16 @@
 #include "xmpmeta/xmp_parser.h"
 #include "xmpmeta/xmp_writer.h"
 
-using photos_editing_formats::xml::DepthFirstSearch;
-using photos_editing_formats::xml::DeserializerImpl;
-using photos_editing_formats::xml::GetFirstDescriptionElement;
-using photos_editing_formats::xml::Serializer;
-using photos_editing_formats::xml::SerializerImpl;
-using photos_editing_formats::xml::ToXmlChar;
-using photos_editing_formats::xml::XmlConst;
+using ::dynamic_depth::xmpmeta::CreateXmpData;
+using ::dynamic_depth::xmpmeta::XmpData;
+using ::dynamic_depth::xmpmeta::xml::DepthFirstSearch;
+using ::dynamic_depth::xmpmeta::xml::DeserializerImpl;
+using ::dynamic_depth::xmpmeta::xml::GetFirstDescriptionElement;
+using ::dynamic_depth::xmpmeta::xml::Serializer;
+using ::dynamic_depth::xmpmeta::xml::SerializerImpl;
+using ::dynamic_depth::xmpmeta::xml::ToXmlChar;
+using ::dynamic_depth::xmpmeta::xml::XmlConst;
 
-namespace photos_editing_formats {
 namespace dynamic_depth {
 namespace {
 
@@ -61,8 +62,8 @@ std::unique_ptr<Device> ParseFields(const xmlDocPtr& xmlDoc) {
   auto app_info =
       AppInfo::FromDeserializer(deserializer, DynamicDepthConst::Device());
 
-  std::unique_ptr<DeviceParams>
-      params(new DeviceParams(std::move(cameras)));  // NOLINT
+  std::unique_ptr<DeviceParams> params(
+      new DeviceParams(std::move(cameras)));  // NOLINT
   params->container = std::move(container);
   params->planes = std::move(planes);
   params->earth_pose = std::move(earth_pose);
@@ -310,4 +311,3 @@ void Device::PopulateNamespaces() {
 }
 
 }  // namespace dynamic_depth
-}  // namespace photos_editing_formats

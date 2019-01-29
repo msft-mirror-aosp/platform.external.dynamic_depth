@@ -8,7 +8,8 @@
 #include "xmpmeta/xml/const.h"
 #include "xmpmeta/xml/utils.h"
 
-namespace photos_editing_formats {
+namespace dynamic_depth {
+namespace xmpmeta {
 namespace xml {
 
 // Methods specific to SerializerImpl.
@@ -244,4 +245,5 @@ bool SerializerImpl::WriteDoubleArray(const string& prefix,
 }
 
 }  // namespace xml
-}  // namespace photos_editing_formats
+}  // namespace xmpmeta
+}  // namespace dynamic_depth

@@ -1,7 +1,8 @@
 #ifndef DYNAMIC_DEPTH_INTERNAL_XMPMETA_XML_CONST_H_  // NOLINT
 #define DYNAMIC_DEPTH_INTERNAL_XMPMETA_XML_CONST_H_  // NOLINT
 
-namespace photos_editing_formats {
+namespace dynamic_depth {
+namespace xmpmeta {
 namespace xml {
 
 struct XmlConst {
@@ -24,6 +25,7 @@ struct XmlConst {
 };
 
 }  // namespace xml
-}  // namespace photos_editing_formats
+}  // namespace xmpmeta
+}  // namespace dynamic_depth
 
 #endif // DYNAMIC_DEPTH_INTERNAL_XMPMETA_XML_CONST_H_  // NOLINT

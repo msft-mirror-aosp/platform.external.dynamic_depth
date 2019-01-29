@@ -5,7 +5,8 @@
 #include "xmpmeta/xml/const.h"
 #include "xmpmeta/xml/search.h"
 
-namespace photos_editing_formats {
+namespace dynamic_depth {
+namespace xmpmeta {
 namespace xml {
 
 xmlNodePtr GetFirstDescriptionElement(const xmlDocPtr parent) {
@@ -74,4 +75,5 @@ const string XmlDocToString(const xmlDocPtr doc) {
 }
 
 }  // namespace xml
-}  // namespace photos_editing_formats
+}  // namespace xmpmeta
+}  // namespace dynamic_depth

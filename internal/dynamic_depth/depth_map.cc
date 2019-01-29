@@ -6,11 +6,11 @@
 #include "strings/numbers.h"
 #include "xmpmeta/base64.h"
 
-using photos_editing_formats::dynamic_depth::Item;
-using photos_editing_formats::xml::Deserializer;
-using photos_editing_formats::xml::Serializer;
+using ::dynamic_depth::Item;
+using ::dynamic_depth::xmpmeta::EncodeFloatArrayBase64;
+using ::dynamic_depth::xmpmeta::xml::Deserializer;
+using ::dynamic_depth::xmpmeta::xml::Serializer;
 
-namespace photos_editing_formats {
 namespace dynamic_depth {
 namespace {
 constexpr const char* kNamespaceHref =
@@ -264,13 +264,12 @@ std::unique_ptr<DepthMap> DepthMap::FromData(
 }
 
 std::unique_ptr<DepthMap> DepthMap::FromDeserializer(
-    const xml::Deserializer& parent_deserializer) {
+    const Deserializer& parent_deserializer) {
   std::unique_ptr<Deserializer> deserializer =
       parent_deserializer.CreateDeserializer(
           DynamicDepthConst::Namespace(DynamicDepthConst::DepthMap()),
           DynamicDepthConst::DepthMap());
   if (deserializer == nullptr) {
-    LOG(ERROR) << "Deserializer must not be null";
     return nullptr;
   }
 
@@ -359,4 +358,3 @@ bool DepthMap::Serialize(Serializer* serializer) const {
 }
 
 }  // namespace dynamic_depth
-}  // namespace photos_editing_formats

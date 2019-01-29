@@ -4,7 +4,8 @@
 #include <libxml/tree.h>
 
 // Performs searches an XML tree.
-namespace photos_editing_formats {
+namespace dynamic_depth {
+namespace xmpmeta {
 namespace xml {
 
 // Depth-first search on the nodes in this XML doc.
@@ -31,6 +32,7 @@ xmlNodePtr DepthFirstSearch(const xmlNodePtr parent, const char* prefix,
                             const char* name);
 
 }  // namespace xml
-}  // namespace photos_editing_formats
+}  // namespace xmpmeta
+}  // namespace dynamic_depth
 
 #endif // DYNAMIC_DEPTH_INTERNAL_XMPMETA_XML_SEARCH_H_  // NOLINT

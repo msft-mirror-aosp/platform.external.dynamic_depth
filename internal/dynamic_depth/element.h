@@ -6,7 +6,6 @@
 #include "xmpmeta/xml/deserializer.h"
 #include "xmpmeta/xml/serializer.h"
 
-namespace photos_editing_formats {
 namespace dynamic_depth {
 
 /**
@@ -25,10 +24,10 @@ class Element {
       std::unordered_map<string, string>* ns_name_href_map) = 0;
 
   // Serializes this element.
-  virtual bool Serialize(xml::Serializer* serializer) const = 0;
+  virtual bool Serialize(
+      ::dynamic_depth::xmpmeta::xml::Serializer* serializer) const = 0;
 };
 
 }  // namespace dynamic_depth
-}  // namespace photos_editing_formats
 
-#endif // DYNAMIC_DEPTH_INTERNAL_DYNAMIC_DEPTH_ELEMENT_H_  // NOLINT
+#endif  // DYNAMIC_DEPTH_INTERNAL_DYNAMIC_DEPTH_ELEMENT_H_  // NOLINT

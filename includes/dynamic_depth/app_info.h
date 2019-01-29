@@ -10,7 +10,6 @@
 #include "xmpmeta/xml/deserializer.h"
 #include "xmpmeta/xml/serializer.h"
 
-namespace photos_editing_formats {
 namespace dynamic_depth {
 
 /**
@@ -27,7 +26,8 @@ class AppInfo : public Element {
       std::unordered_map<string, string>* ns_name_href_map) override;
 
   // Serializes this object.
-  bool Serialize(xml::Serializer* serializer) const override;
+  bool Serialize(
+      ::dynamic_depth::xmpmeta::xml::Serializer* serializer) const override;
 
   // Creates an AppInfo from the given fields. Returns null if the version
   //   field is empty and [item_uri is empty and items is null].
@@ -50,7 +50,7 @@ class AppInfo : public Element {
 
   // Returns the deserialized AppInfo; null if parsing fails.
   static std::unique_ptr<AppInfo> FromDeserializer(
-      const xml::Deserializer& parent_deserializer,
+      const ::dynamic_depth::xmpmeta::xml::Deserializer& parent_deserializer,
       const string& namespace_str);
 
   // Getters.
@@ -65,7 +65,8 @@ class AppInfo : public Element {
  private:
   AppInfo();
 
-  bool ParseFields(const xml::Deserializer& deserializer);
+  bool ParseFields(
+      const ::dynamic_depth::xmpmeta::xml::Deserializer& deserializer);
 
   // Required.
   string application_;
@@ -76,6 +77,5 @@ class AppInfo : public Element {
 };
 
 }  // namespace dynamic_depth
-}  // namespace photos_editing_formats
 
 #endif  // DYNAMIC_DEPTH_INCLUDES_DYNAMIC_DEPTH_APP_INFO_H_  // NOLINT

@@ -7,7 +7,8 @@
 
 #include "base/port.h"
 
-namespace photos_editing_formats {
+namespace dynamic_depth {
+namespace xmpmeta {
 // Decodes the base64-encoded input range. Supports decoding of both web-safe
 // and regular base64."Web-safe" base-64 replaces + with - and / with _, and
 // omits trailing = padding characters.
@@ -34,6 +35,7 @@ bool EncodeDoubleArrayBase64(const std::vector<double>& data, string* output);
 // Base64-decodes the given double array.
 bool DecodeDoubleArrayBase64(const string& data, std::vector<double>* output);
 
-}  // namespace photos_editing_formats
+}  // namespace xmpmeta
+}  // namespace dynamic_depth
 
 #endif // DYNAMIC_DEPTH_INTERNAL_XMPMETA_BASE64_H_  // NOLINT

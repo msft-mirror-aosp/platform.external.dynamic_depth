@@ -7,7 +7,8 @@
 
 #include "base/port.h"
 
-namespace photos_editing_formats {
+namespace dynamic_depth {
+namespace xmpmeta {
 namespace xml {
 
 // Serializes properties for a hierarchy of objects.
@@ -71,6 +72,7 @@ class Serializer {
 };
 
 }  // namespace xml
-}  // namespace photos_editing_formats
+}  // namespace xmpmeta
+}  // namespace dynamic_depth
 
 #endif // DYNAMIC_DEPTH_INTERNAL_XMPMETA_XML_SERIALIZER_H_  // NOLINT

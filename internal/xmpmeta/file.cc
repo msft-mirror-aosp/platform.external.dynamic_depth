@@ -3,7 +3,8 @@
 #include <cstdio>
 #include "android-base/logging.h"
 
-namespace photos_editing_formats {
+namespace dynamic_depth {
+namespace xmpmeta {
 
 using std::string;
 
@@ -56,4 +57,5 @@ string JoinPath(const string& dirname, const string& basename) {
   }
 }
 
-}  // namespace photos_editing_formats
+}  // namespace xmpmeta
+}  // namespace dynamic_depth

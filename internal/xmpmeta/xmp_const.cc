@@ -1,6 +1,7 @@
 #include "xmpmeta/xmp_const.h"
 
-namespace photos_editing_formats {
+namespace dynamic_depth {
+namespace xmpmeta {
 
 // XMP namespace constants.
 const char* XmpConst::Namespace() { return "adobe:ns:meta/"; }
@@ -35,4 +36,5 @@ const int XmpConst::MaxBufferSize() { return 65502; }
 
 const int XmpConst::ExtendedMaxBufferSize() { return 65458; }
 
-}  // namespace photos_editing_formats
+}  // namespace xmpmeta
+}  // namespace dynamic_depth

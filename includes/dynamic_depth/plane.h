@@ -10,7 +10,6 @@
 #include "xmpmeta/xml/deserializer.h"
 #include "xmpmeta/xml/serializer.h"
 
-namespace photos_editing_formats {
 namespace dynamic_depth {
 
 // A Plane element for a Dynamic Depth device.
@@ -26,11 +25,12 @@ class Plane : public Element {
       std::unordered_map<string, string>* ns_name_href_map) override;
 
   // Serializes this object.
-  bool Serialize(xml::Serializer* serializer) const override;
+  bool Serialize(
+      ::dynamic_depth::xmpmeta::xml::Serializer* serializer) const override;
 
   // Returns the deserialized Plane; null if parsing fails.
   static std::unique_ptr<Plane> FromDeserializer(
-      const xml::Deserializer& parent_deserializer);
+      const ::dynamic_depth::xmpmeta::xml::Deserializer& parent_deserializer);
 
   // Creates a Plane from the given fields.
   // The Pose must be present.
@@ -65,7 +65,8 @@ class Plane : public Element {
   Plane();
 
   // Extracts plane fields.
-  bool ParsePlaneFields(const xml::Deserializer& deserializer);
+  bool ParsePlaneFields(
+      const ::dynamic_depth::xmpmeta::xml::Deserializer& deserializer);
 
   // The pose of the center of this plane.
   std::unique_ptr<Pose> pose_;
@@ -88,6 +89,5 @@ class Plane : public Element {
 };
 
 }  // namespace dynamic_depth
-}  // namespace photos_editing_formats
 
 #endif // DYNAMIC_DEPTH_INCLUDES_DYNAMIC_DEPTH_PLANE_H_  // NOLINT

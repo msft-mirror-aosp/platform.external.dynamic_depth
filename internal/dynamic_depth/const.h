@@ -6,7 +6,6 @@
 #include <string>
 #include <vector>
 
-namespace photos_editing_formats {
 namespace dynamic_depth {
 
 struct DynamicDepthConst {
@@ -46,6 +45,5 @@ struct DynamicDepthConst {
 };
 
 }  // namespace dynamic_depth
-}  // namespace photos_editing_formats
 
-#endif // DYNAMIC_DEPTH_INTERNAL_DYNAMIC_DEPTH_CONST_H_  // NOLINT
+#endif  // DYNAMIC_DEPTH_INTERNAL_DYNAMIC_DEPTH_CONST_H_  // NOLINT

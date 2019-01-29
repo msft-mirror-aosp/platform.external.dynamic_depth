@@ -11,7 +11,6 @@
 #include "xmpmeta/xml/deserializer.h"
 #include "xmpmeta/xml/serializer.h"
 
-namespace photos_editing_formats {
 namespace dynamic_depth {
 
 // The depth conversion format. Please see the Depth Map element in the
@@ -86,7 +85,8 @@ class DepthMap : public Element {
   void GetNamespaces(
       std::unordered_map<string, string>* ns_name_href_map) override;
 
-  bool Serialize(xml::Serializer* serializer) const override;
+  bool Serialize(
+      ::dynamic_depth::xmpmeta::xml::Serializer* serializer) const override;
 
   // Creates a DepthMap from the given objects in params.
   static std::unique_ptr<DepthMap> FromData(
@@ -96,7 +96,7 @@ class DepthMap : public Element {
   // Not sensitive to case when parsing the Format, Units, or MeasureType
   // fields.
   static std::unique_ptr<DepthMap> FromDeserializer(
-      const xml::Deserializer& parent_deserializer);
+      const ::dynamic_depth::xmpmeta::xml::Deserializer& parent_deserializer);
 
   DepthFormat GetFormat() const;
   float GetNear() const;
@@ -117,12 +117,11 @@ class DepthMap : public Element {
  private:
   explicit DepthMap(const DepthMapParams& params);
   static std::unique_ptr<DepthMap> ParseFields(
-      const xml::Deserializer& deserializer);
+      const ::dynamic_depth::xmpmeta::xml::Deserializer& deserializer);
 
   DepthMapParams params_;
 };
 
 }  // namespace dynamic_depth
-}  // namespace photos_editing_formats
 
 #endif // DYNAMIC_DEPTH_INCLUDES_DYNAMIC_DEPTH_DEPTH_MAP_H_  // NOLINT

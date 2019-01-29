@@ -9,7 +9,6 @@
 #include "xmpmeta/xml/deserializer.h"
 #include "xmpmeta/xml/serializer.h"
 
-namespace photos_editing_formats {
 namespace dynamic_depth {
 
 // Implements the Profile element in the Dynamic Depth specification, with
@@ -19,7 +18,8 @@ class Profile : public Element {
   void GetNamespaces(
       std::unordered_map<string, string>* ns_name_href_map) override;
 
-  bool Serialize(xml::Serializer* serializer) const override;
+  bool Serialize(
+      ::dynamic_depth::xmpmeta::xml::Serializer* serializer) const override;
 
   // Creates a Profile element from the given fields. Returns null if
   // the type is empty, or if the camera_indices are shorter than the
@@ -31,7 +31,7 @@ class Profile : public Element {
 
   // Returns the deserialized Profile, null if parsing fails.
   static std::unique_ptr<Profile> FromDeserializer(
-      const xml::Deserializer& parent_deserializer);
+      const ::dynamic_depth::xmpmeta::xml::Deserializer& parent_deserializer);
 
   // Returns the Profile type.
   const string& GetType() const;
@@ -51,6 +51,5 @@ class Profile : public Element {
 };
 
 }  // namespace dynamic_depth
-}  // namespace photos_editing_formats
 
 #endif // DYNAMIC_DEPTH_INCLUDES_DYNAMIC_DEPTH_PROFILE_H_  // NOLINT

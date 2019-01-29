@@ -8,7 +8,6 @@
 #include "dynamic_depth/element.h"
 #include "dynamic_depth/item.h"
 
-namespace photos_editing_formats {
 namespace dynamic_depth {
 
 // A Container that holds a directory / array of file Item elementss. Files
@@ -19,7 +18,8 @@ class Container : public Element {
   void GetNamespaces(
       std::unordered_map<string, string>* ns_name_href_map) override;
 
-  bool Serialize(xml::Serializer* serializer) const override;
+  bool Serialize(
+      ::dynamic_depth::xmpmeta::xml::Serializer* serializer) const override;
 
   // Creates this object from the given items. Returns null if the list is
   // empty. If creation succeeds, ownership of the Item objects are transferred
@@ -31,7 +31,7 @@ class Container : public Element {
   // Returns the deserialized item elements, null if parsing failed for all
   // items.
   static std::unique_ptr<Container> FromDeserializer(
-      const xml::Deserializer& parent_deserializer);
+      const ::dynamic_depth::xmpmeta::xml::Deserializer& parent_deserializer);
 
   // Returns the list of cameras.
   const std::vector<const Item*> GetItems() const;
@@ -47,6 +47,5 @@ class Container : public Element {
 };
 
 }  // namespace dynamic_depth
-}  // namespace photos_editing_formats
 
 #endif // DYNAMIC_DEPTH_INCLUDES_DYNAMIC_DEPTH_CONTAINER_H_  // NOLINT

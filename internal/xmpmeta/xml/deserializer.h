@@ -8,7 +8,8 @@
 #include "base/integral_types.h"
 #include "base/port.h"
 
-namespace photos_editing_formats {
+namespace dynamic_depth {
+namespace xmpmeta {
 namespace xml {
 
 // Performs deserialization.
@@ -60,6 +61,7 @@ class Deserializer {
 };
 
 }  // namespace xml
-}  // namespace photos_editing_formats
+}  // namespace xmpmeta
+}  // namespace dynamic_depth
 
 #endif // DYNAMIC_DEPTH_INTERNAL_XMPMETA_XML_DESERIALIZER_H_  // NOLINT

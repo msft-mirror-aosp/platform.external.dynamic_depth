@@ -4,7 +4,6 @@
 #include "dynamic_depth/device.h"
 #include "xmpmeta/xmp_writer.h"
 
-namespace photos_editing_formats {
 namespace dynamic_depth {
 
 // Serialize a JPEG image, its Dynamic Depth metadata, and GContainer files
@@ -13,6 +12,11 @@ bool WriteImageAndMetadataAndContainer(const string& out_filename,
                                        const uint8_t* primary_image_bytes,
                                        size_t primary_image_bytes_count,
                                        Device* device);
+
+// Same as WriteImageAndMetadataAndContainer, but on istream and ostream.
+bool WriteImageAndMetadataAndContainer(std::istream* input_jpeg_stream,
+                                       Device* device,
+                                       std::ostream* output_jpeg_stream);
 
 // Retrieves the contents of a Container:Item's associated file. The contents
 // are populated into out_payload.
@@ -29,6 +33,5 @@ bool GetItemPayload(const string& input_image_filename, const Device* device,
                     const string& item_uri, string* out_payload);
 
 }  // namespace dynamic_depth
-}  // namespace photos_editing_formats
 
-#endif // DYNAMIC_DEPTH_INCLUDES_DYNAMIC_DEPTH_DYNAMIC_DEPTH_H_  // NOLINT
+#endif  // DYNAMIC_DEPTH_INCLUDES_DYNAMIC_DEPTH_DYNAMIC_DEPTH_H_  // NOLINT
