@@ -31,7 +31,6 @@ bool GetItemPayload(const string& input_image_filename,
 // Convenience method for the aboove.
 bool GetItemPayload(const string& input_image_filename, const Device* device,
                     const string& item_uri, string* out_payload);
-
 }  // namespace dynamic_depth
 
 #endif  // DYNAMIC_DEPTH_INCLUDES_DYNAMIC_DEPTH_DYNAMIC_DEPTH_H_  // NOLINT

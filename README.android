@@ -6,4 +6,4 @@ utilities for reading and writing Depth and AR photos.
 Local patches
 -------------
 - Android depth photo validation sequence "ValidateAndroidDynamicDepthBuffer()".
-
+- Add NDK library variant.
