@@ -50,3 +50,28 @@ cc_library {
         "libxml2",
     ],
 }
+
+cc_library_static {
+    name: "libdynamic_depth_ndk",
+    defaults: ["libdynamic_depth-defaults"],
+    vendor_available: false,
+    export_include_dirs: [
+        "includes",
+        "internal"
+    ],
+    srcs: ["internal/**/*.cc"],
+    shared_libs: [
+        "liblog",
+    ],
+    static_libs: [
+        "libimage_io_ndk",
+        "libbase_ndk",
+        "libxml2_ndk",
+    ],
+    cflags: [
+        "-fvisibility=hidden",
+        "-DSTATIC_LIBXML=1",
+    ],
+    sdk_version: "current",
+    stl: "c++_static",
+}
