@@ -104,6 +104,18 @@ int32_t ValidateAndroidDynamicDepthBuffer(const char* buffer, size_t buffer_leng
     return -1;
   }
 
+  std::istringstream input_jpeg_stream(std::string(buffer, buffer_length));
+  std::string depth_payload;
+  if (!GetItemPayload(device->GetContainer(), depth_uri, input_jpeg_stream, &depth_payload)) {
+    LOG(ERROR) << "Unable to retrieve depth map";
+    return -1;
+  }
+
+  if (depth_payload.empty()) {
+    LOG(ERROR) << "Invalid depth map";
+    return -1;
+  }
+
   return 0;
 }
 
