@@ -23,6 +23,8 @@ const char* XmlConst::RdfSeq() { return "Seq"; }
 
 const char* XmlConst::RdfLi() { return "li"; }
 
+const char* XmlConst::RdfParseType() { return "parseType"; }
+
 // XML metadata constants.
 const char* XmlConst::NsAttrName() { return "xmlns"; }
 
