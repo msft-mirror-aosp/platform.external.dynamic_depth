@@ -35,14 +35,14 @@ std::unique_ptr<Device> ParseFields(const xmlDocPtr& xmlDoc) {
   // Find and parse the Device node.
   // Only these two fields are required to be present; the rest are optional.
   // TODO(miraleung): Search for Device by namespace.
-  xmlNodePtr device_node =
-      DepthFirstSearch(xmlDoc, DynamicDepthConst::Device());
-  if (device_node == nullptr) {
-    LOG(ERROR) << "No device node found";
+  xmlNodePtr description_node =
+      DepthFirstSearch(xmlDoc, XmlConst::RdfDescription());
+  if (description_node == nullptr) {
+    LOG(ERROR) << "No rdf description found";
     return nullptr;
   }
 
-  const DeserializerImpl deserializer(device_node);
+  const DeserializerImpl deserializer(description_node);
   auto cameras = Cameras::FromDeserializer(deserializer);
   if (cameras == nullptr) {
     LOG(ERROR) << "No cameras found";
@@ -186,12 +186,6 @@ bool Device::Serialize(xmlDocPtr* xmlDoc) {
     return false;
   }
 
-  // Create a node here instead of through a new deserializer, otherwise
-  // an extraneous prefix will be written to the node name.
-  xmlNodePtr device_node =
-      xmlNewNode(nullptr, ToXmlChar(DynamicDepthConst::Device()));
-  xmlAddChild(root_node, device_node);
-
   PopulateNamespaces();
   xmlNsPtr prev_ns = root_node->ns;
   for (const auto& entry : namespaces_) {
@@ -202,7 +196,7 @@ bool Device::Serialize(xmlDocPtr* xmlDoc) {
   }
 
   // Set up serialization on the first description node in the extended section.
-  SerializerImpl device_serializer(namespaces_, device_node);
+  SerializerImpl device_serializer(namespaces_, root_node);
 
   // Serialize elements.
   if (params_->container &&

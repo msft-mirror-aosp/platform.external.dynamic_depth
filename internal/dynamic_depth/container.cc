@@ -2,15 +2,18 @@
 
 #include "android-base/logging.h"
 #include "dynamic_depth/const.h"
+#include "xmpmeta/xml/const.h"
 
 using ::dynamic_depth::xmpmeta::xml::Deserializer;
 using ::dynamic_depth::xmpmeta::xml::Serializer;
+using ::dynamic_depth::xmpmeta::xml::XmlConst;
 
 namespace dynamic_depth {
 
 constexpr char kNamespaceHref[] =
     "http://ns.google.com/photos/dd/1.0/container/";
 constexpr char kDirectory[] = "Directory";
+constexpr char kResourceType[] = "Resource";
 
 // Private constructor.
 Container::Container() {}
@@ -92,6 +95,12 @@ bool Container::Serialize(Serializer* serializer) const {
       serializer->CreateSerializer(
           DynamicDepthConst::Namespace(DynamicDepthConst::Container()),
           DynamicDepthConst::Container());
+  if (!container_serializer->WriteProperty(XmlConst::RdfPrefix(),
+                                           XmlConst::RdfParseType(),
+                                           kResourceType)) {
+    return false;
+  }
+
   std::unique_ptr<Serializer> directory_serializer =
       container_serializer->CreateListSerializer(DynamicDepthConst::Container(),
                                                  kDirectory);
