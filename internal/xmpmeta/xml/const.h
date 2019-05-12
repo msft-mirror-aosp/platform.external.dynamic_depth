@@ -17,6 +17,7 @@ struct XmlConst {
   static const char* RdfPrefix();
   static const char* RdfSeq();
   static const char* RdfLi();
+  static const char* RdfParseType();
 
   // XML metadata.
   static const char* NsAttrName();

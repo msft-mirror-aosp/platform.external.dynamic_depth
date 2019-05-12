@@ -2,6 +2,8 @@
 
 #include <math.h>
 
+#include <cmath>
+
 #include "android-base/logging.h"
 #include "dynamic_depth/const.h"
 
@@ -25,9 +27,9 @@ const std::vector<float> NormalizeQuaternion(const std::vector<float>& quat) {
   if (quat.size() < 4) {
     return std::vector<float>();
   }
-  float length =
-      sqrt((quat[0] * quat[0]) + (quat[1] * quat[1]) + (quat[2] * quat[2])) +
-      (quat[3] * quat[3]);
+  float length = std::sqrt((quat[0] * quat[0]) + (quat[1] * quat[1]) +
+                           (quat[2] * quat[2])) +
+                 (quat[3] * quat[3]);
   const std::vector<float> normalized = {quat[0] / length, quat[1] / length,
                                          quat[2] / length, quat[3] / length};
   return normalized;
