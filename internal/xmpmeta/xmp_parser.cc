@@ -1,7 +1,6 @@
 #include "xmpmeta/xmp_parser.h"
 
 #include <algorithm>
-#include <cassert>
 #include <cstring>
 #include <sstream>
 #include <stack>
