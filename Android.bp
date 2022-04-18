@@ -1,4 +1,3 @@
-
 package {
     default_applicable_licenses: ["external_dynamic_depth_license"],
 }
@@ -28,7 +27,7 @@ cc_defaults {
     ],
     rtti: true,
     cppflags: ["-fno-exceptions"],
-    clang: true,
+
     sanitize: {
         misc_undefined: [
             "unsigned-integer-overflow",
@@ -43,13 +42,13 @@ cc_defaults {
 }
 
 cc_library_headers {
-  name: "libdynamic_depth-public_headers",
-  export_include_dirs: ["includes"],
+    name: "libdynamic_depth-public_headers",
+    export_include_dirs: ["includes"],
 }
 
 cc_library_headers {
-  name: "libdynamic_depth-internal_headers",
-  export_include_dirs: ["internal"],
+    name: "libdynamic_depth-internal_headers",
+    export_include_dirs: ["internal"],
 }
 
 cc_library {
@@ -72,7 +71,7 @@ cc_library_static {
     defaults: ["libdynamic_depth-defaults"],
     export_include_dirs: [
         "includes",
-        "internal"
+        "internal",
     ],
     srcs: ["internal/**/*.cc"],
     shared_libs: [
