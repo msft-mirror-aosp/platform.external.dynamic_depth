@@ -7,6 +7,7 @@
 #include <stack>
 
 #include "android-base/logging.h"
+#include "libxml/parser.h"
 #include "strings/case.h"
 #include "strings/numbers.h"
 #include "xmpmeta/base64.h"
